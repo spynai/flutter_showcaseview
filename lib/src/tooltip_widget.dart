@@ -61,6 +61,8 @@ class ToolTipWidget extends StatefulWidget {
   final EdgeInsets? descriptionPadding;
   final TextDirection? titleTextDirection;
   final TextDirection? descriptionTextDirection;
+  final List<Widget>? children;
+  final EdgeInsets? childenPadding;
 
   const ToolTipWidget({
     Key? key,
@@ -94,6 +96,8 @@ class ToolTipWidget extends StatefulWidget {
     this.descriptionPadding,
     this.titleTextDirection,
     this.descriptionTextDirection,
+    this.children,
+    this.childenPadding,
   }) : super(key: key);
 
   @override
@@ -344,8 +348,8 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
       paddingBottom = 10;
     }
 
-    const arrowWidth = 18.0;
-    const arrowHeight = 9.0;
+    const arrowWidth = 22.0;
+    const arrowHeight = 18.0;
 
     if (!widget.disableScaleAnimation && widget.isTooltipDismissed) {
       _scaleAnimationController.reverse();
@@ -459,6 +463,13 @@ class _ToolTipWidgetState extends State<ToolTipWidget>
                                                   color: widget.textColor,
                                                 ),
                                               ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: widget.childenPadding ??
+                                        EdgeInsets.zero,
+                                    child: Column(
+                                      children: widget.children ?? [],
                                     ),
                                   ),
                                 ],

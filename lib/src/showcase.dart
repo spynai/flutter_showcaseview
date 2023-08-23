@@ -244,51 +244,63 @@ class Showcase extends StatefulWidget {
   /// will still provide a callback.
   final VoidCallback? onBarrierClick;
 
-  const Showcase({
-    required this.key,
-    required this.description,
-    required this.child,
-    this.title,
-    this.titleAlignment = TextAlign.start,
-    this.descriptionAlignment = TextAlign.start,
-    this.targetShapeBorder = const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-    ),
-    this.overlayColor = Colors.black45,
-    this.overlayOpacity = 0.75,
-    this.titleTextStyle,
-    this.descTextStyle,
-    this.tooltipBackgroundColor = Colors.white,
-    this.textColor = Colors.black,
-    this.scrollLoadingWidget = const CircularProgressIndicator(
-      valueColor: AlwaysStoppedAnimation(Colors.white),
-    ),
-    this.showArrow = true,
-    this.onTargetClick,
-    this.disposeOnTap,
-    this.movingAnimationDuration = const Duration(milliseconds: 2000),
-    this.disableMovingAnimation,
-    this.disableScaleAnimation,
-    this.tooltipPadding =
-        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-    this.onToolTipClick,
-    this.targetPadding = EdgeInsets.zero,
-    this.blurValue,
-    this.targetBorderRadius,
-    this.onTargetLongPress,
-    this.onTargetDoubleTap,
-    this.tooltipBorderRadius,
-    this.disableDefaultTargetGestures = false,
-    this.scaleAnimationDuration = const Duration(milliseconds: 300),
-    this.scaleAnimationCurve = Curves.easeIn,
-    this.scaleAnimationAlignment,
-    this.tooltipPosition,
-    this.titlePadding,
-    this.descriptionPadding,
-    this.titleTextDirection,
-    this.descriptionTextDirection,
-    this.onBarrierClick,
-  })  : height = null,
+  final LinearGradient? backgroundGradient;
+
+  final Color? backgroundColor;
+
+  final List<Widget>? toolTipChildren;
+
+  final EdgeInsets? toolTipChildrenPadding;
+
+  const Showcase(
+      {required this.key,
+      required this.description,
+      required this.child,
+      this.title,
+      this.titleAlignment = TextAlign.start,
+      this.descriptionAlignment = TextAlign.start,
+      this.targetShapeBorder = const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
+      this.overlayColor = Colors.black45,
+      this.overlayOpacity = 0.75,
+      this.titleTextStyle,
+      this.descTextStyle,
+      this.tooltipBackgroundColor = Colors.white,
+      this.textColor = Colors.black,
+      this.scrollLoadingWidget = const CircularProgressIndicator(
+        valueColor: AlwaysStoppedAnimation(Colors.white),
+      ),
+      this.showArrow = true,
+      this.onTargetClick,
+      this.disposeOnTap,
+      this.movingAnimationDuration = const Duration(milliseconds: 2000),
+      this.disableMovingAnimation,
+      this.disableScaleAnimation,
+      this.tooltipPadding =
+          const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      this.onToolTipClick,
+      this.targetPadding = EdgeInsets.zero,
+      this.blurValue,
+      this.targetBorderRadius,
+      this.onTargetLongPress,
+      this.onTargetDoubleTap,
+      this.tooltipBorderRadius,
+      this.disableDefaultTargetGestures = false,
+      this.scaleAnimationDuration = const Duration(milliseconds: 300),
+      this.scaleAnimationCurve = Curves.easeIn,
+      this.scaleAnimationAlignment,
+      this.tooltipPosition,
+      this.titlePadding,
+      this.descriptionPadding,
+      this.titleTextDirection,
+      this.descriptionTextDirection,
+      this.onBarrierClick,
+      this.backgroundGradient,
+      this.backgroundColor,
+      this.toolTipChildren,
+      this.toolTipChildrenPadding})
+      : height = null,
         width = null,
         container = null,
         assert(overlayOpacity >= 0.0 && overlayOpacity <= 1.0,
@@ -298,34 +310,38 @@ class Showcase extends StatefulWidget {
         assert(disposeOnTap == null || onTargetClick != null,
             "onTargetClick is required if you're using disposeOnTap");
 
-  const Showcase.withWidget({
-    required this.key,
-    required this.height,
-    required this.width,
-    required this.container,
-    required this.child,
-    this.targetShapeBorder = const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(8),
+  const Showcase.withWidget(
+      {required this.key,
+      required this.height,
+      required this.width,
+      required this.container,
+      required this.child,
+      this.targetShapeBorder = const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(8),
+        ),
       ),
-    ),
-    this.overlayColor = Colors.black45,
-    this.targetBorderRadius,
-    this.overlayOpacity = 0.75,
-    this.scrollLoadingWidget = const CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation(Colors.white)),
-    this.onTargetClick,
-    this.disposeOnTap,
-    this.movingAnimationDuration = const Duration(milliseconds: 2000),
-    this.disableMovingAnimation,
-    this.targetPadding = EdgeInsets.zero,
-    this.blurValue,
-    this.onTargetLongPress,
-    this.onTargetDoubleTap,
-    this.disableDefaultTargetGestures = false,
-    this.tooltipPosition,
-    this.onBarrierClick,
-  })  : showArrow = false,
+      this.overlayColor = Colors.black45,
+      this.targetBorderRadius,
+      this.overlayOpacity = 0.75,
+      this.scrollLoadingWidget = const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation(Colors.white)),
+      this.onTargetClick,
+      this.disposeOnTap,
+      this.movingAnimationDuration = const Duration(milliseconds: 2000),
+      this.disableMovingAnimation,
+      this.targetPadding = EdgeInsets.zero,
+      this.blurValue,
+      this.onTargetLongPress,
+      this.onTargetDoubleTap,
+      this.disableDefaultTargetGestures = false,
+      this.tooltipPosition,
+      this.onBarrierClick,
+      this.backgroundGradient,
+      this.backgroundColor,
+      this.toolTipChildren,
+      this.toolTipChildrenPadding})
+      : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
         scaleAnimationCurve = Curves.decelerate,
@@ -425,7 +441,29 @@ class _ShowcaseState extends State<Showcase> {
           return buildOverlayOnTarget(offset, rectBound.size, rectBound, size);
         },
         showOverlay: true,
-        child: widget.child,
+        child: _showShowCase &&
+                widget.backgroundColor != null &&
+                widget.backgroundGradient != null
+            ? Container(
+                decoration: BoxDecoration(
+                  gradient: widget.backgroundGradient,
+                  borderRadius: widget.targetBorderRadius != null
+                      ? widget.targetBorderRadius!
+                      : BorderRadius.zero,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    borderRadius: widget.targetBorderRadius != null
+                        ? widget.targetBorderRadius!
+                        : BorderRadius.zero,
+                    color: widget.backgroundColor,
+                  ),
+                  child: widget.child,
+                ),
+              )
+            : widget.child,
       );
     }
     return widget.child;
@@ -573,6 +611,16 @@ class _ShowcaseState extends State<Showcase> {
             descriptionPadding: widget.descriptionPadding,
             titleTextDirection: widget.titleTextDirection,
             descriptionTextDirection: widget.descriptionTextDirection,
+            childenPadding: widget.toolTipChildrenPadding,
+            children: widget.toolTipChildren ??
+                [
+                  _ShowcaseDots(
+                    count: showCaseWidgetState.ids!.length,
+                    highlightedIndex:
+                        showCaseWidgetState.ids!.indexOf(widget.key),
+                    highlightedColor: Colors.white,
+                  )
+                ],
           ),
         ],
       ],
@@ -635,6 +683,44 @@ class _TargetWidget extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ShowcaseDots extends StatelessWidget {
+  final int count;
+  final int highlightedIndex;
+  final Color highlightedColor;
+  const _ShowcaseDots(
+      {Key? key,
+      required this.count,
+      required this.highlightedIndex,
+      required this.highlightedColor})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (highlightedIndex > count - 1) {
+      throw Exception(
+          'highlightedIndex cannot be greater than the total number of dots');
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+          count,
+          (index) => Container(
+                width: 8,
+                height: 8,
+                margin: const EdgeInsets.only(right: 8),
+                decoration: ShapeDecoration(
+                  color: index == highlightedIndex
+                      ? highlightedColor
+                      : Colors.white.withOpacity(0.3),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+              )),
     );
   }
 }

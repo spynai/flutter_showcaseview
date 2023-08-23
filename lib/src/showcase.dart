@@ -614,12 +614,17 @@ class _ShowcaseState extends State<Showcase> {
             childenPadding: widget.toolTipChildrenPadding,
             children: widget.toolTipChildren ??
                 [
-                  _ShowcaseDots(
-                    count: showCaseWidgetState.ids!.length,
-                    highlightedIndex:
-                        showCaseWidgetState.ids!.indexOf(widget.key),
-                    highlightedColor: Colors.white,
-                  )
+                  if (showCaseWidgetState.ids != null &&
+                      showCaseWidgetState.ids!.length > 1 &&
+                      (widget.description != null &&
+                              widget.description!.isNotEmpty ||
+                          widget.title != null && widget.title!.isNotEmpty))
+                    _ShowcaseDots(
+                      count: showCaseWidgetState.ids!.length,
+                      highlightedIndex:
+                          showCaseWidgetState.ids!.indexOf(widget.key),
+                      highlightedColor: Colors.white,
+                    )
                 ],
           ),
         ],

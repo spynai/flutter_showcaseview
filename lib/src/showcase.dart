@@ -139,6 +139,12 @@ class Showcase extends StatefulWidget {
   /// otherwise throws error
   final VoidCallback? onTargetClick;
 
+  /// Triggered when showcased target widget is tapped this is a additional callback to be used if needed without passing disposeOnTap
+  ///
+  /// Note: [disposeOnTap] is not required if you're using [onTargetClickOnPopUp]
+  /// otherwise throws error
+  final VoidCallback? onTargetClickOnPopUp;
+
   /// Will dispose all showcases if tapped on target widget or tooltip
   ///
   /// Note: [onTargetClick] is required if you're using [disposeOnTap]
@@ -299,7 +305,8 @@ class Showcase extends StatefulWidget {
       this.backgroundGradient,
       this.backgroundColor,
       this.toolTipChildren,
-      this.toolTipChildrenPadding})
+      this.toolTipChildrenPadding,
+      this.onTargetClickOnPopUp})
       : height = null,
         width = null,
         container = null,
@@ -340,7 +347,8 @@ class Showcase extends StatefulWidget {
       this.backgroundGradient,
       this.backgroundColor,
       this.toolTipChildren,
-      this.toolTipChildrenPadding})
+      this.toolTipChildrenPadding,
+      this.onTargetClickOnPopUp})
       : showArrow = false,
         onToolTipClick = null,
         scaleAnimationDuration = const Duration(milliseconds: 300),
@@ -490,6 +498,7 @@ class _ShowcaseState extends State<Showcase> {
     } else {
       (widget.onTargetClick ?? _nextIfAny).call();
     }
+    widget.onTargetClickOnPopUp?.call();
   }
 
   Future<void> _getOnTooltipTap() async {
